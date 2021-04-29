@@ -30,8 +30,8 @@ class MyApp extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.only(top: 200),
-                  height: 150,
+                  margin: EdgeInsets.only(top: 100),
+                  height: 80,
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.end,
@@ -45,7 +45,110 @@ class MyApp extends StatelessWidget {
                     ],
                   ),
                 ),
-                NumberPad(),
+                Expanded(
+                  child: Column(children: [
+                    Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          KeyWidget(
+                            buttonString: "AC",
+                            textColor: 0xFF26E8C6,
+                          ),
+                          KeyWidget(
+                            buttonString: "+/-",
+                            textColor: 0xFF26E8C6,
+                          ),
+                          KeyWidget(
+                            buttonString: "%",
+                            textColor: 0xFF26E8C6,
+                          ),
+                          KeyWidget(
+                            buttonString: "÷",
+                            textColor: 0xFFEA6666,
+                          ),
+                        ]),
+                    Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          KeyWidget(
+                            buttonString: "7",
+                            textColor: 0xFFFEFEFE,
+                          ),
+                          KeyWidget(
+                            buttonString: "8",
+                            textColor: 0xFFFEFEFE,
+                          ),
+                          KeyWidget(
+                            buttonString: "9",
+                            textColor: 0xFFFEFEFE,
+                          ),
+                          KeyWidget(
+                            buttonString: "x",
+                            textColor: 0xFFEA6666,
+                          ),
+                        ]),
+                    Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          KeyWidget(
+                            buttonString: "4",
+                            textColor: 0xFFFEFEFE,
+                          ),
+                          KeyWidget(
+                            buttonString: "5",
+                            textColor: 0xFFFEFEFE,
+                          ),
+                          KeyWidget(
+                            buttonString: "6",
+                            textColor: 0xFFFEFEFE,
+                          ),
+                          KeyWidget(
+                            buttonString: "-",
+                            textColor: 0xFFEA6666,
+                          ),
+                        ]),
+                    Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          KeyWidget(
+                            buttonString: "1",
+                            textColor: 0xFFFEFEFE,
+                          ),
+                          KeyWidget(
+                            buttonString: "2",
+                            textColor: 0xFFFEFEFE,
+                          ),
+                          KeyWidget(
+                            buttonString: "3",
+                            textColor: 0xFFFEFEFE,
+                          ),
+                          KeyWidget(
+                            buttonString: "+",
+                            textColor: 0xFFEA6666,
+                          ),
+                        ]),
+                    Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          KeyWidget(
+                            buttonString: "Reset",
+                            textColor: 0xFFFEFEFE,
+                          ),
+                          KeyWidget(
+                            buttonString: "0",
+                            textColor: 0xFFFEFEFE,
+                          ),
+                          KeyWidget(
+                            buttonString: ".",
+                            textColor: 0xFFFEFEFE,
+                          ),
+                          KeyWidget(
+                            buttonString: "=",
+                            textColor: 0xFFEA6666,
+                          ),
+                        ]),
+                  ]),
+                )
               ],
             ),
           ),
@@ -55,53 +158,34 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class NumberPad extends StatelessWidget {
-  const NumberPad({
-    Key key,
-  }) : super(key: key);
+class KeyWidget extends StatelessWidget {
+  final int textColor;
+  final String buttonString;
+  const KeyWidget({Key key, this.buttonString, this.textColor})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    double deviceWidth = MediaQuery.of(context).size.width;
     return Expanded(
-      child: Container(
+      child: InkWell(
+        child: Container(
+          margin: EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 10),
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(20), topRight: Radius.circular(20)),
-            color: Color(0xFF292D36),
-          ),
-          height: 200,
-          width: deviceWidth,
-          child: Expanded(
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                InkWell(
-                  child: Container(
-                    margin: EdgeInsets.all(20),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: Color(0xFF272B33),
-                    ),
-                    height: 80,
-                    width: 80,
-                    child: Center(
-                        child: Text(
-                      "AC",
-                      style: TextStyle(
-                          color: Color(0xFF26E8C6),
-                          fontSize: 20,
-                          fontWeight: FontWeight.w900),
-                    )),
-                  ),
-                  onTap: () {
-                    print("AC Button is Clicked");
-                  },
-                ),
-              ],
+              color: Color(0xFF272B33),
+              borderRadius: BorderRadius.circular(10)),
+          width: 100,
+          height: 90,
+          child: Center(
+            child: Text(
+              buttonString,
+              style: TextStyle(color: Color(textColor), fontSize: 30),
             ),
-          )),
+          ),
+        ),
+        onTap: () {
+          print("Key Pressed");
+        },
+      ),
     );
   }
 }
